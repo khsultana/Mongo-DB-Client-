@@ -1,8 +1,11 @@
 import { Button } from 'flowbite-react';
 import React, { useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
 
-const User = () => {
-    const [user, setUser] = useState({})
+const Update = () => {
+    const storeData = useLoaderData()
+
+    const [user, setUser] = useState({ storeData })
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(user);
@@ -35,19 +38,20 @@ const User = () => {
 
     return (
         <div>
-            <h2>This is User</h2>
-            <form onSubmit={handleSubmit}>
-                <input onBlur={handleSubmitBlur} type="text" name='name' placeholder='Your Name' required /> <br />
-                <br />
-                <input onBlur={handleSubmitBlur} type="email" name="email" placeholder='Your Email' required />
-                <br />
-                <br />
-                <center><Button type='btn'>Added User</Button></center>
-            </form>
+            <h2 className='text-3xl'>Please Update:  {storeData.name}</h2>
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <input onBlur={handleSubmitBlur} defaultValue={storeData.name} type="text" name='name' placeholder='Your Name' required /> <br />
+                    <br />
+                    <input onBlur={handleSubmitBlur} defaultValue={storeData.email} type="email" name="email" placeholder='Your Email' required />
+                    <br />
+                    <br />
+                    <center><Button type='btn'>Added User</Button></center>
+                </form>
 
-
-        </div>
+            </div>
+        </div >
     );
 };
 
-export default User;
+export default Update;
